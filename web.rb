@@ -20,13 +20,15 @@ get '/?:image_name?' do
   base_image = MiniMagick::Image.open("images/#{image_name}.png")
   base_image.resize "300x300"
 
-  composite_image = base_image.composite(text_image) do |c|
+  pattern_image = pattern_image(params[:pattern])
+  composite_image = pattern_image.composite(base_image) do |c|
+    c.compose "Over"
+  end
+
+  composite_image = composite_image.composite(text_image) do |c|
     c.compose "Over"
     c.gravity 'South'
   end
-  composite_image.format "png"
-  content_type 'image/png'
-  send_file composite_image.path
 
   composite_image.format "png"
   content_type 'image/png'
@@ -35,6 +37,11 @@ end
 
 def valid_image_name?(image_name)
   File.exist?("images/#{image_name}.png")
+end
+
+def pattern_image(pattern_name)
+  pattern_name = "white" unless File.exist?("images/patterns/#{pattern_name}.png")
+  MiniMagick::Image.open("images/patterns/#{pattern_name}.png")
 end
 
 def create_text_image(text, font_name: FONT_DEFAULT)
