@@ -58,4 +58,5 @@ def create_text_image(text, font_name: FONT_DEFAULT)
     c.stroke 'black'
   end
   text_image.trim
+  text_image.resize "300x300"
 end
