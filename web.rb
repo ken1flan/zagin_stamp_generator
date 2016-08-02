@@ -5,6 +5,7 @@ require 'kittenizer'
 
 BASE_IMAGE_PATHS = {
   'happi_coat': 'images/happi_coat.png',
+  'quiet_anger': 'images/quiet_anger.png',
   'thumbup': 'images/thumbup.png',
 }
 FONT_DEFAULT = :noto
@@ -45,7 +46,7 @@ get '/?:image_name?' do
 
   composite_image = composite_image.composite(text_image) do |c|
     c.compose "Over"
-    c.gravity 'South'
+    c.gravity 'North'
   end
 
   composite_image.format "png"
@@ -65,7 +66,7 @@ end
 def create_text_image(text, font_name: FONT_DEFAULT)
   font_name = FONT_DEFAULT unless font_name && FONT_PATHS.keys.include?(font_name.to_sym)
 
-  font_size = 30
+  font_size = 50
   text_image = MiniMagick::Image.open('images/text_base.png')
   text_image.combine_options do |c|
     c.gravity 'North'
