@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    haml (4.0.7)
+      tilt
     kittenizer (0.1.0)
     mini_magick (4.5.1)
     rack (1.6.4)
@@ -16,6 +18,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  haml
   kittenizer
   mini_magick
   sinatra

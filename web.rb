@@ -1,12 +1,30 @@
 require 'sinatra'
+require 'haml'
 require 'mini_magick'
 require 'kittenizer'
 
+BASE_IMAGE_PATHS = {
+  'happi_coat': 'images/happi_coat.png',
+  'thumbup': 'images/thumbup.png',
+}
 FONT_DEFAULT = :noto
 FONT_PATHS = {
   noto: 'fonts/NotoSansCJKjp-Black.otf',
   kei: 'fonts/keifont.ttf',
 }
+PATTERN_PATHS = {
+  white: 'images/patterns/white.png',
+  tora: 'images/patterns/tora.png',
+  mike: 'images/patterns/mike.png',
+}
+
+get '/form' do
+  @url_root =  "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}"
+  @base_image_names = BASE_IMAGE_PATHS.keys
+  @font_names = FONT_PATHS.keys
+  @patterns = PATTERN_PATHS.keys
+  haml :form
+end
 
 get '/?:image_name?' do
   font_name = params[:font_name]
