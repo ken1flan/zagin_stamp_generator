@@ -3,6 +3,8 @@ require 'haml'
 require 'mini_magick'
 require 'kittenizer'
 
+require "sinatra/reloader" if development?
+
 BASE_IMAGE_PATHS = {
   'happi_coat': 'images/happi_coat.png',
   'quiet_anger': 'images/quiet_anger.png',
