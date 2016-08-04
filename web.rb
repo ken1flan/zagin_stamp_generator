@@ -9,6 +9,7 @@ BASE_IMAGE_PATHS = {
   'happi_coat': 'images/happi_coat.png',
   'quiet_anger': 'images/quiet_anger.png',
   'thumbup': 'images/thumbup.png',
+  'cheers': 'images/cheers.png',
 }
 FONT_DEFAULT = :noto
 FONT_PATHS = {
