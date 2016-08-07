@@ -41,14 +41,23 @@
           .form-group
             %label.col-md-2.control-label{ for: 'inputUrl' } URL
             .col-md-10
-              %input.form-control.js__input-image-url{ id: 'inputUrl', name: 'markdown' }
+              .input-group
+                %input.form-control.js__input-image-url{ id: 'inputUrl', name: 'markdown' }
+                .input-group-btn
+                  %button.btn.btn-default.js__clip-button{data: {'clipboard-target': '#inputUrl'}}
+                    %span.glyphicon.glyphicon-copy
           .form-group
             %label.col-md-2.control-label{ for: 'inputMarkdown' } Markdown
             .col-md-10
-              %input.form-control{ id: 'inputMarkdown', name: 'markdown' }
+              .input-group
+                %input.form-control{ id: 'inputMarkdown', name: 'markdown' }
+                .input-group-btn
+                  %button.btn.btn-default.js__clip-button{ data: {'clipboard-target': '#inputMarkdown'} }
+                    %span.glyphicon.glyphicon-copy
 
         .col-md-6
           %img.img-thumbnail.js__stamp-image-url{ src: "/top?text=sample"}
   %script{src: "https://code.jquery.com/jquery-3.1.0.min.js"}
   %script{src: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", integrity: "sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa", crossorigin: "anonymous"}
+  %script{src: 'https://cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js'}
   %script{src: "/javascripts/application.js"}

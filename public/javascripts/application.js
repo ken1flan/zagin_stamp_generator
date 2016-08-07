@@ -2,6 +2,8 @@ $(function(){
   $('.js__image-generator-form').change(imageUrl);
   $('textarea.js__image-generator-form').keyup(imageUrl);
   imageUrl();
+
+  new Clipboard('.js__clip-button');
 });
 
 function imageUrl () {
