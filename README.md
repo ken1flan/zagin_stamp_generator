@@ -12,6 +12,17 @@ This is a web application of generating a cat image with your specified text.
 https://zagin-stamp-generator.herokuapp.com/form
 
 # Development
+## Requirement
+Postgresql
+
+## Setup
+Copy `dot.env` to `.env`
+Set `DATABASE_URL`.
+
+```bash
+$ rake db:migrate
+```
+
 ## Run server
 
 ```bash

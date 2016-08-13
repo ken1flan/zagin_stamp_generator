@@ -2,8 +2,15 @@ require 'sinatra'
 require 'haml'
 require 'mini_magick'
 require 'kittenizer'
+require_relative 'image_history_repo'
+require_relative 'image_history'
 
-require "sinatra/reloader" if development?
+if development?
+  require "sinatra/reloader" if development?
+  require 'pry'
+  require 'dotenv'
+  Dotenv.load
+end
 
 BASE_IMAGE_PATHS = {
   'happi_coat': 'images/happi_coat.png',
@@ -22,12 +29,24 @@ PATTERN_PATHS = {
   mike: 'images/patterns/mike.png',
 }
 
+rom = ROM.container(:sql, "#{ENV['DATABASE_URL']}")
+image_history_repo = ImageHistoryRepo.new(rom)
+
 get '/form' do
   @url_root =  "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}"
   @base_image_names = BASE_IMAGE_PATHS.keys
   @font_names = FONT_PATHS.keys
   @patterns = PATTERN_PATHS.keys
   haml :form
+end
+
+get '/save_params' do
+  image_history_repo.create(
+    image_name: params[:image_name],
+    text: params[:text],
+    font_name: params[:font_name],
+    pattern: params[:pattern],
+  )
 end
 
 get '/?:image_name?' do
