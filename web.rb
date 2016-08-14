@@ -17,6 +17,7 @@ BASE_IMAGE_PATHS = {
   'quiet_anger': 'images/quiet_anger.png',
   'thumbup': 'images/thumbup.png',
   'cheers': 'images/cheers.png',
+  'burnt_out': 'images/burnt_out.png',
 }
 FONT_DEFAULT = :noto
 FONT_PATHS = {
