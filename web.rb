@@ -13,11 +13,11 @@ if development?
 end
 
 BASE_IMAGE_PATHS = {
-  'happi_coat': 'images/happi_coat.png',
-  'quiet_anger': 'images/quiet_anger.png',
-  'thumbup': 'images/thumbup.png',
-  'cheers': 'images/cheers.png',
-  'burnt_out': 'images/burnt_out.png',
+  'happi_coat': 'images/bases/happi_coat.png',
+  'quiet_anger': 'images/bases/quiet_anger.png',
+  'thumbup': 'images/bases/thumbup.png',
+  'cheers': 'images/bases/cheers.png',
+  'burnt_out': 'images/bases/burnt_out.png',
 }
 FONT_DEFAULT = :noto
 FONT_PATHS = {
@@ -59,7 +59,7 @@ get '/?:image_name?' do
   text_image = create_text_image(text, font_name: font_name)
 
   image_name = valid_image_name?(params[:image_name]) ? params[:image_name] : 'top'
-  base_image = MiniMagick::Image.open("images/#{image_name}.png")
+  base_image = MiniMagick::Image.open("images/bases/#{image_name}.png")
   base_image.resize "300x300"
 
   pattern_image = pattern_image(params[:pattern])
@@ -78,7 +78,7 @@ get '/?:image_name?' do
 end
 
 def valid_image_name?(image_name)
-  File.exist?("images/#{image_name}.png")
+  File.exist?("images/bases/#{image_name}.png")
 end
 
 def pattern_image(pattern_name)
