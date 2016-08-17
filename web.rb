@@ -18,6 +18,7 @@ BASE_IMAGE_PATHS = {
   'thumbup': 'images/bases/thumbup.png',
   'cheers': 'images/bases/cheers.png',
   'burnt_out': 'images/bases/burnt_out.png',
+  'thats_great': 'images/bases/thats_great.png',
 }
 FONT_DEFAULT = :noto
 FONT_PATHS = {
