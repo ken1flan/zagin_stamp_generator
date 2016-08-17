@@ -101,5 +101,20 @@ def create_text_image(text, font_name: FONT_DEFAULT)
     c.stroke 'black'
   end
   text_image.trim
-  text_image.resize "300x300"
+  text_image.resize "280x290"
+  text_image.combine_options do |c|
+    c.splice "x10"
+    c.gravity 'North'
+    c.background "None"
+  end
+  text_image.combine_options do |c|
+    c.splice "10x"
+    c.gravity 'West'
+    c.background "None"
+  end
+  text_image.combine_options do |c|
+    c.splice "10x"
+    c.gravity 'East'
+    c.background "None"
+  end
 end
