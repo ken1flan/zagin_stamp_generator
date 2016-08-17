@@ -2,8 +2,8 @@ require 'sinatra'
 require 'haml'
 require 'mini_magick'
 require 'kittenizer'
-require_relative 'image_history_repo'
-require_relative 'image_history'
+require_relative 'classes/image_history_repo'
+require_relative 'classes/image_history'
 
 if development?
   require "sinatra/reloader" if development?
