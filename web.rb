@@ -31,6 +31,11 @@ PATTERN_PATHS = {
   tora: 'images/patterns/tora.png',
   mike: 'images/patterns/mike.png',
 }
+SIZES = {
+  Large: {height: 300, width: 300},
+  Middle: {height: 150, width: 150},
+  Small: {height: 75, width: 75},
+}
 
 rom = ROM.container(:sql, "#{ENV['DATABASE_URL']}")
 image_history_repo = ImageHistoryRepo.new(rom)
@@ -40,6 +45,7 @@ get '/form' do
   @base_image_names = BASE_IMAGE_PATHS.keys
   @font_names = FONT_PATHS.keys
   @patterns = PATTERN_PATHS.keys
+  @sizes = SIZES.keys
   haml :form
 end
 
@@ -49,6 +55,7 @@ get '/save_params' do
     text: params[:text],
     font_name: params[:font_name],
     pattern: params[:pattern],
+    size: params[:size],
   )
 end
 
@@ -73,6 +80,10 @@ get '/?:image_name?' do
     c.compose "Over"
     c.gravity 'North'
   end
+
+  size = SIZES[params[:size].to_sym]
+  size ||= SIZES[:Large]
+  composite_image.resize "#{size[:width]}x#{size[:height]}"
 
   composite_image.format "png"
   content_type 'image/png'
