@@ -81,8 +81,7 @@ get '/?:image_name?' do
     c.gravity 'North'
   end
 
-  size = SIZES[params[:size].to_sym]
-  size ||= SIZES[:Large]
+  size = SIZES[params[:size] ? params[:size].to_sym : :Large]
   composite_image.resize "#{size[:width]}x#{size[:height]}"
 
   composite_image.format "png"
