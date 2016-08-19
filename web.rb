@@ -78,7 +78,8 @@ get '/?:image_name?' do
 
   composite_image = composite_image.composite(text_image) do |c|
     c.compose "Over"
-    c.gravity 'North'
+    c.geometry "+10+10"
+    c.gravity 'NorthWest'
   end
 
   size = SIZES[params[:size] ? params[:size].to_sym : :Large]
@@ -113,19 +114,4 @@ def create_text_image(text, font_name: FONT_DEFAULT)
   end
   text_image.trim
   text_image.resize "280x290"
-  text_image.combine_options do |c|
-    c.splice "x10"
-    c.gravity 'North'
-    c.background "None"
-  end
-  text_image.combine_options do |c|
-    c.splice "10x"
-    c.gravity 'West'
-    c.background "None"
-  end
-  text_image.combine_options do |c|
-    c.splice "10x"
-    c.gravity 'East'
-    c.background "None"
-  end
 end
