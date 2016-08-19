@@ -39,6 +39,12 @@
                 - @patterns.each do |pattern|
                   %option{ value: pattern } #{pattern}
           .form-group
+            %label.col-md-2.control-label{ for: 'selectSize' } Size
+            .col-md-10
+              %select.form-control.js__image-generator-form{ id: 'selectSize', name: 'size' }
+                - @sizes.each do |size|
+                  %option{ value: size } #{size}
+          .form-group
             %label.col-md-2.control-label{ for: 'inputUrl' } URL
             .col-md-10
               .input-group

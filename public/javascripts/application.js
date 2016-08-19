@@ -13,7 +13,7 @@ function imageUrl () {
     var $form = $(this);
     parameters[$form.attr('name')] = $form.val();
   });
-  var imageUrl = $('body').data('urlroot') + '/' + parameters['image_name'] + '?text=' + encodeURI(parameters['text']) + '&pattern=' + parameters['pattern'] + '&font_name=' + parameters['font_name'];
+  var imageUrl = $('body').data('urlroot') + '/' + parameters['image_name'] + '?text=' + encodeURI(parameters['text']) + '&pattern=' + parameters['pattern'] + '&font_name=' + parameters['font_name'] + '&size=' + parameters['size'];
   $('#inputUrl').val(imageUrl);
   $('#inputMarkdown').val('![zagin stamp](' + imageUrl + ')');
   $('.js__stamp-image-url').attr('src', imageUrl);
@@ -30,7 +30,8 @@ function saveParams () {
       image_name: parameters['image_name'],
       text: parameters['text'],
       pattern: parameters['pattern'],
-      font_name: parameters['font_name']
+      font_name: parameters['font_name'],
+      size: parameters['size']
     }
   ).done(function () {
     console.log('success');
