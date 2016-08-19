@@ -19,6 +19,7 @@ BASE_IMAGE_PATHS = {
   'cheers': 'images/bases/cheers.png',
   'burnt_out': 'images/bases/burnt_out.png',
   'thats_great': 'images/bases/thats_great.png',
+  'any_update_on_this': 'images/bases/any_update_on_this.png',
 }
 FONT_DEFAULT = :noto
 FONT_PATHS = {
