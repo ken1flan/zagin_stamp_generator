@@ -30,6 +30,7 @@ FONT_PATHS = {
 }
 PATTERN_PATHS = {
   white: 'images/patterns/white.png',
+  zagin: 'images/patterns/zagin.png',
   tora: 'images/patterns/tora.png',
   mike: 'images/patterns/mike.png',
 }
