@@ -4,6 +4,7 @@ require 'mini_magick'
 require 'kittenizer'
 require_relative 'classes/image_history_repo'
 require_relative 'classes/image_history'
+require_relative 'classes/base_image'
 
 if development?
   require "sinatra/reloader" if development?
@@ -12,17 +13,13 @@ if development?
   Dotenv.load
 end
 
-BASE_IMAGE_PATHS = {
-  'happi_coat': 'images/bases/happi_coat.png',
-  'quiet_anger': 'images/bases/quiet_anger.png',
-  'thumbup': 'images/bases/thumbup.png',
-  'cheers': 'images/bases/cheers.png',
-  'burnt_out': 'images/bases/burnt_out.png',
-  'thats_great': 'images/bases/thats_great.png',
-  'any_update_on_this': 'images/bases/any_update_on_this.png',
-  'i_see': 'images/bases/i_see.png',
-  'hmmmmm': 'images/bases/hmmmmm.png',
-}
+base_images = []
+File.open('images.yml') do |file|
+  YAML.load(file.read).each do |data|
+    base_images << BaseImage.new(data)
+  end
+end
+
 FONT_DEFAULT = :noto
 FONT_PATHS = {
   noto: 'fonts/NotoSansCJKjp-Black.otf',
@@ -45,7 +42,7 @@ image_history_repo = ImageHistoryRepo.new(rom)
 
 get '/form' do
   @url_root =  "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}"
-  @base_image_names = BASE_IMAGE_PATHS.keys
+  @base_image_names = base_images.map{|i| i.id}
   @font_names = FONT_PATHS.keys
   @patterns = PATTERN_PATHS.keys
   @sizes = SIZES.keys
