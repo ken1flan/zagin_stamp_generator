@@ -1,3 +1,4 @@
+require 'yaml'
 require 'sinatra'
 require 'haml'
 require 'mini_magick'
