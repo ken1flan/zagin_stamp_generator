@@ -26,7 +26,7 @@ image_history_repo = ImageHistoryRepo.new(rom)
 
 get '/form' do
   @url_root =  "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}"
-  @base_image_names = base_images.map{|i| i.id}
+  @base_image_names = base_images.map{|i| i.id}.select{|id| id != 'top'}
   @font_names = BaseImage::FONT_PATHS.keys
   @patterns = BaseImage::PATTERN_PATHS.keys
   @sizes = BaseImage::SIZES.keys
