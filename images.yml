@@ -63,8 +63,8 @@
   :textbox_angle: 0
 - :id: top
   :name: top
-  :textbox_x: 0
-  :textbox_y: 0
-  :textbox_w: 280
-  :textbox_h: 280
+  :textbox_x: 20
+  :textbox_y: 180
+  :textbox_w: 260
+  :textbox_h: 120
   :textbox_angle: 0
