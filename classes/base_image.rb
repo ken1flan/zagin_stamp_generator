@@ -1,6 +1,7 @@
 class BaseImage
   require 'mini_magick'
   require 'kittenizer'
+  require_relative 'pattern_image'
 
   attr_accessor :id, :name, :text, :font_name, :textbox_x, :textbox_y, :textbox_w, :textbox_h, :textbox_angle, :pattern_name
 
@@ -60,9 +61,8 @@ class BaseImage
   end
 
   def pattern_image
-    fix_pattern_name = pattern_name
-    fix_pattern_name ||= "white" unless File.exist?("images/patterns/#{pattern_name}.png")
-    MiniMagick::Image.open("images/patterns/#{fix_pattern_name}.png")
+    pattern_image = PatternImage.new(PatternImage.valid?(pattern_name) ? pattern_name : PATTERN_DEFAULT)
+    pattern_image.image
   end
 
   def composite
