@@ -26,7 +26,12 @@ $ rake db:migrate
 ## Run server
 
 ```bash
-$ ruby web.rb
+$ bundle exec ruby web.rb
+```
+
+## Run tests
+```bash
+$ bundle exec rpec
 ```
 
 # About Fonts

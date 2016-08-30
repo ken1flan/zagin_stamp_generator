@@ -13,7 +13,11 @@ gem 'rom-repository'
 gem 'rom-sql'
 gem 'pg'
 
-group :development do
+group :development, :test do
   gem 'racksh'
   gem 'pry-byebug'
+end
+
+group :test do
+  gem 'rspec'
 end
