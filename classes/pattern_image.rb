@@ -8,7 +8,8 @@ class PatternImage
   end
 
   def path
-    "images/patterns/#{id}.png"
+    image_dir = File.expand_path('../../images/patterns/', __FILE__)
+    "#{image_dir}/#{id}.png"
   end
 
   def valid?
