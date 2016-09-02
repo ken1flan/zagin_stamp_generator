@@ -1,8 +1,8 @@
-require File.expand_path '../spec_helper.rb', __FILE__
+require File.expand_path '../../spec_helper.rb', __FILE__
 
 describe "PatternImage" do
   let(:pattern_image){ PatternImage.new('text') }
-  let(:image_dir){ File.expand_path('../../images/patterns/', __FILE__) }
+  let(:image_dir){ File.expand_path('../../../images/patterns/', __FILE__) }
 
   describe "#initialize" do
     subject { pattern_image.id }
