@@ -1,30 +1,63 @@
 require File.expand_path '../../spec_helper.rb', __FILE__
+require 'mini_magick'
 
 describe "PatternImage" do
-  let(:pattern_image){ PatternImage.new('text') }
+  let(:pattern_image){ PatternImage.new('zagin') }
   let(:image_dir){ File.expand_path('../../../images/patterns/', __FILE__) }
 
   describe "#initialize" do
     subject { pattern_image.id }
-    it { is_expected.to eql 'text' }
+    it { is_expected.to eql 'zagin' }
   end
 
   describe "#path" do
     subject { pattern_image.path }
-    it { is_expected.to eql "#{image_dir}/text.png" }
+    it { is_expected.to eql "#{image_dir}/zagin.png" }
   end
 
-  describe "#valid?" do
-    context 'When id = top' do
+  describe "#valid? / #invalid?" do
+    subject(:valid?) { pattern_image.valid? }
+    subject(:invalid?) { pattern_image.invalid? }
+
+    context 'When id = zagin' do
       let(:pattern_image){PatternImage.new('zagin')}
-      subject { pattern_image.valid? }
-      it { is_expected.to be_truthy }
+      it "expects valid returns truthy and invalid returns falsy" do
+        expect(valid?).to be_truthy
+        expect(invalid?).to be_falsy
+      end
     end
 
     context 'When id = not_exist' do
       let(:pattern_image){PatternImage.new('not_exist')}
-      subject { pattern_image.valid? }
-      it { is_expected.to be_falsy }
+      it "expects valid returns falsy and invalid returns truthy" do
+        expect(valid?).to be_falsy
+        expect(invalid?).to be_truthy
+      end
+    end
+  end
+
+  describe "#image" do
+    subject { pattern_image.image }
+    it { is_expected.to eql MiniMagick::Image.open("#{image_dir}/zagin.png")}
+  end
+
+  describe ".valid? / .invalid?" do
+    context 'When id = zagin' do
+      subject(:valid?) { PatternImage.valid?('zagin') }
+      subject(:invalid?) { PatternImage.invalid?('zagin') }
+      it "expects valid returns truthy and invalid returns falsy" do
+        expect(valid?).to be_truthy
+        expect(invalid?).to be_falsy
+      end
+    end
+
+    context 'When id = not_exist' do
+      subject(:valid?) { PatternImage.valid?('not_exist') }
+      subject(:invalid?) { PatternImage.invalid?('not_exist') }
+      it "expects valid returns falsy and invalid returns truthy" do
+        expect(valid?).to be_falsy
+        expect(invalid?).to be_truthy
+      end
     end
   end
 end
