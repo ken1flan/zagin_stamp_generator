@@ -2,13 +2,14 @@ class BaseImage
   require 'mini_magick'
   require 'kittenizer'
   require_relative 'pattern_image'
+  require_relative 'text_image'
 
   attr_accessor :id, :name, :text, :font_name, :textbox_x, :textbox_y, :textbox_w, :textbox_h, :textbox_angle, :pattern_name
 
-  FONT_DEFAULT = :noto
+  FONT_DEFAULT = :"NotoSansCJKjp-Black"
   FONT_PATHS = {
-    noto: 'fonts/NotoSansCJKjp-Black.otf',
-    kei: 'fonts/keifont.ttf',
+    "NotoSansCJKjp-Black": 'fonts/NotoSansCJKjp-Black.otf',
+    "keifont": 'fonts/keifont.ttf',
   }
   PATTERN_DEFAULT = :white
   PATTERN_PATHS = {
@@ -42,22 +43,11 @@ class BaseImage
   end
 
   def text_image
-    text.kittenize!
     fix_font_name = font_name
     fix_font_name = FONT_DEFAULT unless font_name && FONT_PATHS.keys.include?(font_name.to_sym)
 
-    font_size = 50
-    text_image = MiniMagick::Image.open('images/text_base.png')
-    text_image.combine_options do |c|
-      c.gravity 'North'
-      c.pointsize font_size
-      c.font FONT_PATHS[fix_font_name.to_sym]
-      c.fill 'white'
-      c.annotate '0,0', text
-      c.stroke 'black'
-    end
-    text_image.trim
-    text_image.resize "#{textbox_w}x#{textbox_h}"
+    text_image = TextImage.new(text: text, font_name: fix_font_name, width: textbox_w, height: textbox_h)
+    text_image.image
   end
 
   def pattern_image
