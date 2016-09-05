@@ -1,4 +1,4 @@
-class BaseImage
+class Stamp
   require 'mini_magick'
   require 'kittenizer'
   require_relative 'pattern_image'
