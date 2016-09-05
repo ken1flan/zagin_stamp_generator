@@ -6,7 +6,7 @@ require 'kittenizer'
 require 'rom'
 require_relative 'classes/image_history_repo'
 require_relative 'classes/image_history'
-require_relative 'classes/base_image'
+require_relative 'classes/stamp'
 
 if development?
   require "sinatra/reloader" if development?
@@ -15,10 +15,10 @@ if development?
   Dotenv.load
 end
 
-base_images = []
-File.open('images.yml') do |file|
+stamps = []
+File.open('stamps.yml') do |file|
   YAML.load(file.read).each do |data|
-    base_images << BaseImage.new(data)
+    stamps << Stamp.new(data)
   end
 end
 
@@ -27,10 +27,10 @@ image_history_repo = ImageHistoryRepo.new(rom)
 
 get '/form' do
   @url_root =  "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}"
-  @base_image_names = base_images.map{|i| i.id}.select{|id| id != 'top'}
-  @font_names = BaseImage::FONT_PATHS.keys
-  @patterns = BaseImage::PATTERN_PATHS.keys
-  @sizes = BaseImage::SIZES.keys
+  @base_image_names = stamps.map{|i| i.id}.select{|id| id != 'top'}
+  @font_names = Stamp::FONT_PATHS.keys
+  @patterns = Stamp::PATTERN_PATHS.keys
+  @sizes = Stamp::SIZES.keys
   haml :form
 end
 
@@ -47,23 +47,23 @@ end
 get '/?:image_name?' do
   font_name = params[:font_name]
 
-  base_image_information = base_images.find {|i| i.id == params[:image_name]}
-  base_image_information ||= base_images.find {|i| i.id == "top"}
+  stamp = stamps.find {|i| i.id == params[:image_name]}
+  stamp ||= stamps.find {|i| i.id == "top"}
 
   text = params[:text]
   text ||= 'Zagin Stamp\nGenerator'
-  base_image_information.text = text
-  base_image_information.font_name = font_name
+  stamp.text = text
+  stamp.font_name = font_name
 
-  base_image_information.pattern_name = params[:pattern]
-  composite_image = base_image_information.composite
+  stamp.pattern_name = params[:pattern]
+  stamp_image = stamp.composite
 
-  size = BaseImage::SIZES[params[:size] ? params[:size].to_sym : :Large]
-  composite_image.resize "#{size[:width]}x#{size[:height]}"
+  size = Stamp::SIZES[params[:size] ? params[:size].to_sym : :Large]
+  stamp_image.resize "#{size[:width]}x#{size[:height]}"
 
-  composite_image.format "png"
+  stamp_image.format "png"
   content_type 'image/png'
-  send_file composite_image.path
+  send_file stamp_image.path
 end
 
 def valid_image_name?(image_name)
