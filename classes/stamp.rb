@@ -14,6 +14,9 @@ class Stamp
   PATTERN_DEFAULT = :white
   PATTERN_PATHS = {
     white: 'images/patterns/white.png',
+    darkgray: 'images/patterns/darkgray.png',
+    moccasin: 'images/patterns/moccasin.png',
+    royalblue: 'images/patterns/royalblue.png',
     zagin: 'images/patterns/zagin.png',
     tora: 'images/patterns/tora.png',
     mike: 'images/patterns/mike.png',
