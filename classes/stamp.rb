@@ -1,6 +1,7 @@
 class Stamp
   require 'mini_magick'
   require 'kittenizer'
+  require_relative 'base_image'
   require_relative 'pattern_image'
   require_relative 'text_image'
 
@@ -35,11 +36,8 @@ class Stamp
   end
 
   def base_image
-    unless @base_image
-      @base_image = MiniMagick::Image.open("images/bases/#{id}.png")
-    end
-    @base_image.resize "300x300"
-    @base_image
+    base_image = BaseImage.new(id)
+    base_image.image
   end
 
   def text_image
