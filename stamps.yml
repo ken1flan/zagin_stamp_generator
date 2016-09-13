@@ -54,6 +54,13 @@
   :textbox_w: 280
   :textbox_h: 280
   :textbox_angle: 0
+- :id: sorry
+  :name: sorry
+  :textbox_x: 20
+  :textbox_y: 10
+  :textbox_w: 280
+  :textbox_h: 280
+  :textbox_angle: 0
 - :id: thumbup
   :name: thumbup
   :textbox_x: 20
