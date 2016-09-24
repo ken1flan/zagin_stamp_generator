@@ -50,6 +50,8 @@ get '/?:image_name?' do
   stamp = stamps.find {|i| i.id == params[:image_name]}
   stamp ||= stamps.find {|i| i.id == "top"}
 
+  stamp.mirror_copy = true if params[:mirror_copy] == 'yes'
+
   text = params[:text]
   text ||= 'Zagin Stamp\nGenerator'
   stamp.text = text
