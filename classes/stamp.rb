@@ -5,7 +5,7 @@ class Stamp
   require_relative 'pattern_image'
   require_relative 'text_image'
 
-  attr_accessor :id, :name, :text, :font_name, :textbox_x, :textbox_y, :textbox_w, :textbox_h, :textbox_angle, :pattern_name
+  attr_accessor :id, :name, :mirror_copy, :text, :font_name, :textbox_x, :textbox_y, :textbox_w, :textbox_h, :textbox_angle, :pattern_name
 
   FONT_DEFAULT = :"NotoSansCJKjp-Black"
   FONT_PATHS = {
@@ -28,9 +28,10 @@ class Stamp
     Small: {height: 75, width: 75},
   }
 
-  def initialize(id: nil, name: nil, font_name: FONT_DEFAULT, textbox_x: 0, textbox_y: 0, textbox_w: 300, textbox_h: 300, textbox_angle: 0, pattern_name: PATTERN_DEFAULT )
+  def initialize(id: nil, name: nil, mirror_copy: false, font_name: FONT_DEFAULT, textbox_x: 0, textbox_y: 0, textbox_w: 300, textbox_h: 300, textbox_angle: 0, pattern_name: PATTERN_DEFAULT )
     self.id = id
     self.name = name
+    self.mirror_copy = mirror_copy
     self.textbox_x = textbox_x
     self.textbox_y = textbox_y
     self.textbox_w = textbox_w
@@ -39,7 +40,7 @@ class Stamp
   end
 
   def base_image
-    base_image = BaseImage.new(id)
+    base_image = BaseImage.new(id, mirror_copy)
     base_image.image
   end
 

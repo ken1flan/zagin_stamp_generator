@@ -12,6 +12,12 @@
           - @base_image_names.each do |base_image_name|
             %option{ value: base_image_name } #{base_image_name}
     .form-group
+      %label.col-md-2.control-label{ for: 'selectMirror' } Mirror Copy
+      .col-md-10
+        %select.form-control.js__image-generator-form{ id: 'selectMirrorCopy', name: 'mirror_copy' }
+          %option{ value: 'no' } No
+          %option{ value: 'yes' } Yes
+    .form-group
       %label.col-md-2.control-label{ for: 'selectFontName' } Font
       .col-md-10
         %select.form-control.js__image-generator-form{ id: 'selectFontName', name: 'font_name' }
