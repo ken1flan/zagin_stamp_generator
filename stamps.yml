@@ -40,6 +40,13 @@
   :textbox_w: 280
   :textbox_h: 280
   :textbox_angle: 0
+- :id: no_kidding
+  :name: no_kidding
+  :textbox_x: 20
+  :textbox_y: 10
+  :textbox_w: 280
+  :textbox_h: 280
+  :textbox_angle: 0
 - :id: quiet_anger
   :name: quiet_anger
   :textbox_x: 10
