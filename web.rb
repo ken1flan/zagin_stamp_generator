@@ -3,16 +3,11 @@ require 'sinatra'
 require 'haml'
 require 'mini_magick'
 require 'kittenizer'
-require 'rom'
-require_relative 'classes/image_history_repo'
-require_relative 'classes/image_history'
 require_relative 'classes/stamp'
 
 if development?
   require "sinatra/reloader" if development?
   require 'pry'
-  require 'dotenv'
-  Dotenv.load
 end
 
 stamps = []
@@ -22,9 +17,6 @@ File.open('stamps.yml') do |file|
   end
 end
 
-rom = ROM.container(:sql, "#{ENV['DATABASE_URL']}")
-image_history_repo = ImageHistoryRepo.new(rom)
-
 get '/form' do
   @url_root =  "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}"
   @base_image_names = stamps.map{|i| i.id}.select{|id| id != 'top'}
@@ -32,16 +24,6 @@ get '/form' do
   @patterns = Stamp::PATTERN_PATHS.keys
   @sizes = Stamp::SIZES.keys
   haml :form
-end
-
-get '/save_params' do
-  image_history_repo.create(
-    image_name: params[:image_name],
-    text: params[:text],
-    font_name: params[:font_name],
-    pattern: params[:pattern],
-    size: params[:size],
-  )
 end
 
 get '/?:image_name?' do
