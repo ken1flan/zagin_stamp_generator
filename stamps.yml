@@ -54,6 +54,13 @@
   :textbox_w: 280
   :textbox_h: 280
   :textbox_angle: 0
+- :id: thanks_a_lot
+  :name: thanks_a_lot
+  :textbox_x: 10
+  :textbox_y: 10
+  :textbox_w: 280
+  :textbox_h: 280
+  :textbox_angle: 0
 - :id: thats_great
   :name: thats_great
   :textbox_x: 10
