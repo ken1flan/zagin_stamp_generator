@@ -2,7 +2,7 @@
   :name: happi_coat
   :textbox_x: 10
   :textbox_y: 10
-  :textbox_w: 280
+  :textbox_w: 140
   :textbox_h: 280
   :textbox_angle: 0
 - :id: any_update_on_this
@@ -10,70 +10,70 @@
   :textbox_x: 10
   :textbox_y: 10
   :textbox_w: 280
-  :textbox_h: 280
+  :textbox_h: 140
   :textbox_angle: 0
 - :id: burnt_out
   :name: burnt_out
   :textbox_x: 10
   :textbox_y: 10
   :textbox_w: 280
-  :textbox_h: 280
+  :textbox_h: 120
   :textbox_angle: 0
 - :id: cheers
   :name: cheers
   :textbox_x: 10
   :textbox_y: 10
   :textbox_w: 280
-  :textbox_h: 280
+  :textbox_h: 110
   :textbox_angle: 0
 - :id: hmmmmm
   :name: hmmmmm
   :textbox_x: 10
   :textbox_y: 10
   :textbox_w: 280
-  :textbox_h: 280
+  :textbox_h: 110
   :textbox_angle: 0
 - :id: i_see
   :name: i_see
   :textbox_x: 10
   :textbox_y: 10
   :textbox_w: 280
-  :textbox_h: 280
+  :textbox_h: 110
   :textbox_angle: 0
 - :id: no_kidding
   :name: no_kidding
   :textbox_x: 20
   :textbox_y: 10
   :textbox_w: 280
-  :textbox_h: 280
+  :textbox_h: 110
   :textbox_angle: 0
 - :id: quiet_anger
   :name: quiet_anger
   :textbox_x: 10
   :textbox_y: 10
   :textbox_w: 280
-  :textbox_h: 280
+  :textbox_h: 110
   :textbox_angle: 0
 - :id: thats_great
   :name: thats_great
   :textbox_x: 10
   :textbox_y: 10
   :textbox_w: 280
-  :textbox_h: 280
+  :textbox_h: 130
   :textbox_angle: 0
 - :id: sorry
   :name: sorry
   :textbox_x: 10
   :textbox_y: 10
   :textbox_w: 280
-  :textbox_h: 280
+  :textbox_h: 120
   :textbox_angle: 0
 - :id: thumbup
   :name: thumbup
   :textbox_x: 10
   :textbox_y: 10
   :textbox_w: 280
-  :textbox_h: 280
+  :textbox_h: 100
   :textbox_angle: 0
 - :id: top
   :name: top
@@ -87,5 +87,5 @@
   :textbox_x: 10
   :textbox_y: 10
   :textbox_w: 280
-  :textbox_h: 280
+  :textbox_h: 110
   :textbox_angle: 0
