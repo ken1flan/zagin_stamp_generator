@@ -37,6 +37,11 @@ class TextImage
     end
     image.trim
     image.resize "#{width}x#{height}"
+    image.combine_options do |c|
+      c.background 'None'
+      c.gravity "center"
+      c.extent "#{width}x#{height}"
+    end
   end
 
   def self.valid_font_name?(font_name)
