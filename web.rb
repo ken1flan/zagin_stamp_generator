@@ -10,16 +10,21 @@ if development?
   require 'pry'
 end
 
-stamps = []
-File.open('stamps.yml') do |file|
-  YAML.load(file.read).each do |data|
-    stamps << Stamp.new(data)
-  end
+Stamp.load(File.expand_path("../stamps.yml", __FILE__))
+
+get '/favicon.ico' do
+  stamp = Stamp.create_by_id('top')
+  stamp.text = 'Zagin Stamp\nGenerator'
+
+  stamp_image = stamp.composite
+  stamp_image.format "png"
+  content_type 'image/png'
+  send_file stamp_image.path
 end
 
 get '/form' do
   @url_root =  "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}"
-  @base_image_names = stamps.map{|i| i.id}.select{|id| id != 'top'}
+  @base_image_names = Stamp.list.keys
   @font_names = Stamp::FONT_PATHS.keys
   @patterns = Stamp::PATTERN_PATHS.keys
   @sizes = Stamp::SIZES.keys
@@ -29,8 +34,7 @@ end
 get '/?:image_name?' do
   font_name = params[:font_name]
 
-  stamp = stamps.find {|i| i.id == params[:image_name]}
-  stamp ||= stamps.find {|i| i.id == "top"}
+  stamp = Stamp.create_by_id(params[:image_name])
 
   stamp.mirror_copy = true if params[:mirror_copy] == 'yes'
 

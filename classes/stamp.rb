@@ -28,7 +28,9 @@ class Stamp
     Small: {height: 75, width: 75},
   }
 
-  def initialize(id: nil, name: nil, mirror_copy: false, font_name: FONT_DEFAULT, textbox_x: 0, textbox_y: 0, textbox_w: 300, textbox_h: 300, textbox_angle: 0, pattern_name: PATTERN_DEFAULT )
+  @@default_data = nil
+
+  def initialize(id: nil, name: nil, text: nil, mirror_copy: false, font_name: FONT_DEFAULT, textbox_x: 0, textbox_y: 0, textbox_w: 300, textbox_h: 300, textbox_angle: 0, pattern_name: PATTERN_DEFAULT )
     self.id = id
     self.name = name
     self.mirror_copy = mirror_copy
@@ -68,5 +70,37 @@ class Stamp
       c.gravity 'NorthWest'
     end
     composite_image
+  end
+
+  def self.load(file_path)
+    @@default_data = {}
+    File.open(file_path) do |file|
+      YAML.load(file.read).each do |data|
+        @@default_data[data[:id]] = Stamp.new(data)
+      end
+    end
+  end
+
+  def self.reset
+    @@default_data = nil
+  end
+
+  def self.create_by_id(id)
+    raise "doesn't load default data" unless self.setup?
+
+    stamp = @@default_data[id]
+    raise "not found #{id}" unless stamp
+
+    stamp.dup
+  end
+
+  def self.list
+    raise "doesn't load default data" unless self.setup?
+
+    @@default_data
+  end
+
+  def self.setup?
+    !!@@default_data
   end
 end
