@@ -1,0 +1,34 @@
+- text_id = "textAreaText#{panel_num}"
+.form-group
+  %label.col-md-2.control-label{ for: text_id } Text
+  .col-md-10
+    %textarea.form-control.js__comic-generator-form{ id: text_id, name: "frames[#{panel_num}][text]", placeholder: "LGTM!\n...with nits."}
+      LGTM!
+- image_name_id = "selectImageName#{panel_num}"
+.form-group
+  %label.col-md-2.control-label{ for: image_name_id } Base image
+  .col-md-10
+    %select.form-control.js__comic-generator-form{ id: image_name_id, name: "frames[#{panel_num}][image_name]"}
+      - @base_image_names.each do |base_image_name|
+        %option{ value: base_image_name } #{base_image_name}
+- mirror_copy_id = "selectMirrorCopy#{panel_num}"
+.form-group
+  %label.col-md-2.control-label{ for: mirror_copy_id } Mirror Copy
+  .col-md-10
+    %select.form-control.js__comic-generator-form{ id: mirror_copy_id, name: "frames[#{panel_num}][mirror_copy]" }
+      %option{ value: 'no' } No
+      %option{ value: 'yes' } Yes
+- font_name_id = "selectFontName#{panel_num}"
+.form-group
+  %label.col-md-2.control-label{ for: font_name_id } Font
+  .col-md-10
+    %select.form-control.js__comic-generator-form{ id: font_name_id, name: "frames[#{panel_num}][font_name]" }
+      - @font_names.each do |font_name|
+        %option{ value: font_name } #{font_name}
+- pattern_id = "selectPattern#{panel_num}"
+.form-group
+  %label.col-md-2.control-label{ for: pattern_id } Pattern
+  .col-md-10
+    %select.form-control.js__comic-generator-form{ id: pattern_id, name: "frames[#{panel_num}][pattern]" }
+      - @patterns.each do |pattern|
+        %option{ value: pattern } #{pattern}

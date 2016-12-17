@@ -4,6 +4,7 @@ require 'haml'
 require 'mini_magick'
 require 'kittenizer'
 require_relative 'classes/stamp'
+require_relative 'classes/comic'
 
 if development?
   require "sinatra/reloader" if development?
@@ -29,6 +30,47 @@ get '/form' do
   @patterns = Stamp::PATTERN_PATHS.keys
   @sizes = Stamp::SIZES.keys
   haml :form
+end
+
+get '/comic' do
+  panel_attributes = {}
+  params[:frames].each do |id, params|
+    panel_attributes[id] = {
+      image_name: params[:image_name],
+      mirror_copy: params[:mirror_copy] == 'yes' ? true : false,
+      text: params[:text],
+      font_name: params[:font_name],
+      pattern: params[:pattern]
+    }
+  end
+
+  comic_image = Comic.new(
+    title: params[:title],
+    panel_attributes: panel_attributes
+  ).image
+
+  comic_image.format "png"
+  content_type 'image/png'
+  send_file comic_image.path
+end
+
+get '/comic/form' do
+  @url_root =  "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}"
+  @base_image_names = Stamp.list.keys
+  @font_names = Stamp::FONT_PATHS.keys
+  @patterns = Stamp::PATTERN_PATHS.keys
+  @sizes = Stamp::SIZES.keys
+  haml :'comic/form'
+end
+
+get '/save_params' do
+  image_history_repo.create(
+    image_name: params[:image_name],
+    text: params[:text],
+    font_name: params[:font_name],
+    pattern: params[:pattern],
+    size: params[:size],
+  )
 end
 
 get '/?:image_name?' do

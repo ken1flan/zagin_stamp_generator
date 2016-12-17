@@ -1,0 +1,42 @@
+%h1
+  4-panel comic
+
+.row
+  .col-md-8.col-xs-8
+    %br
+    - title_id = "titleText"
+    .form-group
+      %label.col-md-2.control-label{ for: title_id } Title
+      .col-md-10
+        %input.form-control.js__comic-generator-form{ id: title_id, type: :text, name: "title", placeholder: "LGTM!"}
+    %br
+    %br
+    %ul.nav.nav-tabs
+      %li.active{role: 'presentation'}
+        %a{href: '#tab-pane-1', aria: {controls: "tab-pane-1"}, role: "tab", data: {toggle: "tab"}} 1st
+      %li{role: 'presentation'}
+        %a{href: '#tab-pane-2', aria: {controls: "tab-pane-2"}, role: "tab", data: {toggle: "tab"}} 2nd
+      %li{role: 'presentation'}
+        %a{href: '#tab-pane-3', aria: {controls: "tab-pane-3"}, role: "tab", data: {toggle: "tab"}} 3rd
+      %li{role: 'presentation'}
+        %a{href: '#tab-pane-4', aria: {controls: "tab-pane-4"}, role: "tab", data: {toggle: "tab"}} 4th
+
+    %br
+    .tab-content
+      - 1.upto(4) do |panel_num|
+        %div{class: "tab-pane #{panel_num == 1 ? 'active' : ''}", id: "tab-pane-#{panel_num}", role: 'tabpanel'}
+          .form-horizontal
+            = haml :'comic/_form', locals: {panel_num: panel_num}
+
+  .col-md-4.col-xs-4
+    %p
+      %button.btn.btn-primary.js__comic-update
+        Update Comic
+    %p
+      .input-group
+        %input.form-control.js__input-image-url{ id: 'inputUrl', name: 'markdown' }
+        .input-group-btn
+          %button.btn.btn-default.js__clip-button{data: {'clipboard-target': '#inputUrl'}}
+            %span.glyphicon.glyphicon-copy
+    %p
+      %img.img-thumbnail.js__comic-image-url{src: "/images/comic_sample.png"}

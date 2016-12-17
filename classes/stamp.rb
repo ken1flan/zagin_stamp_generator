@@ -33,6 +33,7 @@ class Stamp
   def initialize(id: nil, name: nil, text: nil, mirror_copy: false, font_name: FONT_DEFAULT, textbox_x: 0, textbox_y: 0, textbox_w: 300, textbox_h: 300, textbox_angle: 0, pattern_name: PATTERN_DEFAULT )
     self.id = id
     self.name = name
+    self.text = text
     self.mirror_copy = mirror_copy
     self.textbox_x = textbox_x
     self.textbox_y = textbox_y
