@@ -42,7 +42,7 @@ function imageUrl () {
     var $form = $(this);
     parameters[$form.attr('name')] = $form.val();
   });
-  var imageUrl = $('body').data('urlroot') + '/' + parameters['image_name'] + '?text=' + encodeURI(parameters['text']) + '&pattern=' + parameters['pattern'] + '&mirror_copy=' + parameters['mirror_copy'] + '&font_name=' + parameters['font_name'] + '&size=' + parameters['size'];
+  var imageUrl = $('body').data('urlroot') + '/' + parameters['image_name'] + '?text=' + encodeURI(parameters['text']) + '&text_color=' + parameters['text_color'] + '&pattern=' + parameters['pattern'] + '&mirror_copy=' + parameters['mirror_copy'] + '&font_name=' + parameters['font_name'] + '&size=' + parameters['size'];
   $('#inputUrl').val(imageUrl);
   $('#inputMarkdown').val('![zagin stamp](' + imageUrl + ')');
   $('.js__stamp-image-url').attr('src', imageUrl);

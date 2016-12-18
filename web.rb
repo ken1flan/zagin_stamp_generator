@@ -11,11 +11,13 @@ if development?
   require 'pry'
 end
 
+Color.load(File.expand_path("../colors.yml", __FILE__))
 Stamp.load(File.expand_path("../stamps.yml", __FILE__))
 
 get '/favicon.ico' do
   stamp = Stamp.create_by_id('top')
   stamp.text = 'Zagin Stamp\nGenerator'
+  stamp.text_color = 'white'
 
   stamp_image = stamp.composite
   stamp_image.format "png"
@@ -25,6 +27,7 @@ end
 
 get '/form' do
   @url_root =  "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}"
+  @text_colors = Color.list.keys
   @base_image_names = Stamp.list.keys
   @font_names = Stamp::FONT_PATHS.keys
   @patterns = Stamp::PATTERN_PATHS.keys
@@ -77,12 +80,12 @@ get '/?:image_name?' do
   font_name = params[:font_name]
 
   stamp = Stamp.create_by_id(params[:image_name])
-
   stamp.mirror_copy = true if params[:mirror_copy] == 'yes'
 
   text = params[:text]
   text ||= 'Zagin Stamp\nGenerator'
   stamp.text = text
+  stamp.text_color = !!params[:text_color] ? params[:text_color] : "white"
   stamp.font_name = font_name
 
   stamp.pattern_name = params[:pattern]

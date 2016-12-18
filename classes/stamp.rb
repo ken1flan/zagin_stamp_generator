@@ -5,7 +5,7 @@ class Stamp
   require_relative 'pattern_image'
   require_relative 'text_image'
 
-  attr_accessor :id, :name, :mirror_copy, :text, :font_name, :textbox_x, :textbox_y, :textbox_w, :textbox_h, :textbox_angle, :pattern_name
+  attr_accessor :id, :name, :mirror_copy, :text, :text_color, :font_name, :textbox_x, :textbox_y, :textbox_w, :textbox_h, :textbox_angle, :pattern_name
 
   FONT_DEFAULT = :"NotoSansCJKjp-Black"
   FONT_PATHS = {
@@ -30,10 +30,11 @@ class Stamp
 
   @@default_data = nil
 
-  def initialize(id: nil, name: nil, text: nil, mirror_copy: false, font_name: FONT_DEFAULT, textbox_x: 0, textbox_y: 0, textbox_w: 300, textbox_h: 300, textbox_angle: 0, pattern_name: PATTERN_DEFAULT )
+  def initialize(id: nil, name: nil, text: nil, text_color: nil, mirror_copy: false, font_name: FONT_DEFAULT, textbox_x: 0, textbox_y: 0, textbox_w: 300, textbox_h: 300, textbox_angle: 0, pattern_name: PATTERN_DEFAULT )
     self.id = id
     self.name = name
     self.text = text
+    self.text_color = text_color
     self.mirror_copy = mirror_copy
     self.textbox_x = textbox_x
     self.textbox_y = textbox_y
@@ -51,7 +52,7 @@ class Stamp
     fix_font_name = font_name
     fix_font_name = FONT_DEFAULT unless font_name && FONT_PATHS.keys.include?(font_name.to_sym)
 
-    text_image = TextImage.new(text: text, font_name: fix_font_name, width: textbox_w, height: textbox_h)
+    text_image = TextImage.new(text: text, fill_color_id: text_color, font_name: fix_font_name, width: textbox_w, height: textbox_h)
     text_image.image
   end
 
