@@ -32,6 +32,7 @@ class Comic
       stamp = Stamp.create_by_id(params[:image_name])
       stamp.mirror_copy = params[:mirror_copy] == 'yes'
       stamp.text = params[:text]
+      stamp.text_color = params[:text_color]
       stamp.font_name = params[:font_name]
       stamp.pattern_name = params[:pattern]
       @panels[id] = stamp

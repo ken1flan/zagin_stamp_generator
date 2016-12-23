@@ -42,6 +42,7 @@ get '/comic' do
       image_name: params[:image_name],
       mirror_copy: params[:mirror_copy] == 'yes' ? true : false,
       text: params[:text],
+      text_color: params[:text_color],
       font_name: params[:font_name],
       pattern: params[:pattern]
     }
@@ -60,6 +61,7 @@ end
 get '/comic/form' do
   @url_root =  "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}"
   @base_image_names = Stamp.list.keys
+  @text_colors = Color.list.keys
   @font_names = Stamp::FONT_PATHS.keys
   @patterns = Stamp::PATTERN_PATHS.keys
   @sizes = Stamp::SIZES.keys

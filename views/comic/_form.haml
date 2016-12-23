@@ -4,6 +4,13 @@
   .col-md-10
     %textarea.form-control.js__comic-generator-form{ id: text_id, name: "frames[#{panel_num}][text]", placeholder: "LGTM!\n...with nits."}
       LGTM!
+- text_color_id = "selectTextColor#{panel_num}"
+.form-group
+  %label.col-md-2.control-label{ for: text_color_id } Text color
+  .col-md-10
+    %select.form-control.js__comic-generator-form{ id: text_color_id, name: "frames[#{panel_num}][text_color]"}
+      - @text_colors.each do |text_color|
+        %option{ value: text_color } #{text_color}
 - image_name_id = "selectImageName#{panel_num}"
 .form-group
   %label.col-md-2.control-label{ for: image_name_id } Base image
