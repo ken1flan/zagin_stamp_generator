@@ -2,7 +2,9 @@ require File.expand_path '../../spec_helper.rb', __FILE__
 require_relative '../../classes/text_image'
 require 'mini_magick'
 
-describe "ComponentImage" do
+describe TextImage do
+  before { Color.load(File.expand_path '../../../colors.yml', __FILE__) }
+
   describe "#initialize" do
     context "With no parameters" do
       let(:text_image) { TextImage.new }
