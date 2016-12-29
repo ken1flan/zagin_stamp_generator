@@ -50,10 +50,8 @@ class TextImage
       c.fill fill_color.code
       c.annotate '0,0', kittenize? ? text.kittenize : text
       c.stroke stroke_color.code
-    end
-    image.trim
-    image.resize "#{width}x#{height}"
-    image.combine_options do |c|
+      c.trim
+      c.resize "#{width}x#{height}"
       c.background 'None'
       c.gravity "center"
       c.extent "#{width}x#{height}"
