@@ -8,6 +8,7 @@ gem 'mini_magick'
 gem 'kittenizer'
 gem 'haml'
 gem 'dotenv'
+gem 'dalli'
 
 group :development, :test do
   gem 'racksh'
