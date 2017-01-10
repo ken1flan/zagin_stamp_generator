@@ -1,4 +1,5 @@
 class Stamp
+  require 'dalli'
   require 'mini_magick'
   require 'kittenizer'
   require_relative 'base_image'
@@ -29,6 +30,7 @@ class Stamp
   }
 
   @@default_data = nil
+  @@cache_client = nil
 
   def initialize(id: nil, name: nil, text: nil, text_color: nil, mirror_copy: false, font_name: FONT_DEFAULT, textbox_x: 0, textbox_y: 0, textbox_w: 300, textbox_h: 300, textbox_angle: 0, pattern_name: PATTERN_DEFAULT )
     self.id = id
@@ -62,6 +64,9 @@ class Stamp
   end
 
   def composite
+    cached_data = self.class.cache_client.get(cache_key)
+    return MiniMagick::Image.read(cached_data, 'png') if cached_data
+
     composite_image = pattern_image.composite(base_image) do |c|
       c.compose "Over"
     end
@@ -71,7 +76,18 @@ class Stamp
       c.geometry "+#{textbox_x}+#{textbox_y}"
       c.gravity 'NorthWest'
     end
+    self.class.cache_client.set(cache_key, composite_image.to_blob)
     composite_image
+  end
+
+  def cache_key
+    "stamp_#{id}_#{name}_#{text}_#{text_color}_#{mirror_copy}_#{font_name}_#{textbox_x}_#{textbox_y}_#{textbox_w}_#{textbox_h}_#{textbox_angle}_#{pattern_name}"
+  end
+
+  def self.cache_client
+    return @@cache_client if @@cache_client
+    @@cache_client = Dalli::Client.new('localhost:11211')
+    @@cache_client
   end
 
   def self.load(file_path)
