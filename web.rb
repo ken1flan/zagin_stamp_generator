@@ -19,7 +19,7 @@ get '/favicon.ico' do
   stamp.text = 'Zagin Stamp\nGenerator'
   stamp.text_color = 'white'
 
-  stamp_image = stamp.composite
+  stamp_image = stamp.image
   stamp_image.format "png"
   content_type 'image/png'
   send_file stamp_image.path
@@ -91,7 +91,7 @@ get '/?:image_name?' do
   stamp.font_name = font_name
 
   stamp.pattern_name = params[:pattern]
-  stamp_image = stamp.composite
+  stamp_image = stamp.image
 
   size = Stamp::SIZES[params[:size] ? params[:size].to_sym : :Large]
   stamp_image.resize "#{size[:width]}x#{size[:height]}"
