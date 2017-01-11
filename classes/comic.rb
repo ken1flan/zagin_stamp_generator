@@ -64,7 +64,7 @@ class Comic
     end
 
     panels.each do |id, panel|
-      panel_image = panel.composite.resize "#{PANEL_SIZE[:width]}x#{PANEL_SIZE[:height]}"
+      panel_image = panel.image.resize "#{PANEL_SIZE[:width]}x#{PANEL_SIZE[:height]}"
       @image = @image.composite(panel_image) do |c|
         c.compose "Over"
         c.geometry "+0+#{TITLE_HEIGHT + (PANEL_SIZE[:height] + MARGIN) * (id.to_i - 1)}"

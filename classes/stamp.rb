@@ -61,7 +61,7 @@ class Stamp
     pattern_image.image
   end
 
-  def composite
+  def image
     composite_image = pattern_image.composite(base_image) do |c|
       c.compose "Over"
     end
