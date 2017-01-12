@@ -4,6 +4,9 @@ class Stamp
   require_relative 'base_image'
   require_relative 'pattern_image'
   require_relative 'text_image'
+  require_relative '../lib/cacheable_image'
+
+  include CacheableImage
 
   attr_accessor :id, :name, :mirror_copy, :text, :text_color, :font_name, :textbox_x, :textbox_y, :textbox_w, :textbox_h, :textbox_angle, :pattern_name
 
@@ -43,6 +46,14 @@ class Stamp
     self.textbox_angle = textbox_angle
   end
 
+  def image_ext
+    :png
+  end
+
+  def cache_key
+    "stamp_#{id}_#{name}_#{text}_#{text_color}_#{mirror_copy}_#{font_name}_#{textbox_x}_#{textbox_y}_#{textbox_w}_#{textbox_h}_#{textbox_angle}_#{pattern_name}"
+  end
+
   def base_image
     base_image = BaseImage.new(id, mirror_copy)
     base_image.image
@@ -62,6 +73,9 @@ class Stamp
   end
 
   def image
+    cached_image = load_image_from_cache
+    return cached_image if cached_image
+
     composite_image = pattern_image.composite(base_image) do |c|
       c.compose "Over"
     end
@@ -71,7 +85,8 @@ class Stamp
       c.geometry "+#{textbox_x}+#{textbox_y}"
       c.gravity 'NorthWest'
     end
-    composite_image
+
+    save_to_cache(composite_image)
   end
 
   def self.load(file_path)
