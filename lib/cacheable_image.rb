@@ -3,6 +3,7 @@ require 'mini_magick'
 
 module CacheableImage
   @@cache_client = nil
+  EXPIRES_IN = 600 # 10 munites
 
   def image_ext
     raise "Must override method :image_ext"
@@ -37,7 +38,12 @@ module CacheableImage
     cache_server = ENV['CACHE_SERVER']
     return nil unless cache_server
 
-    @@cache_client = Dalli::Client.new(ENV["CACHE_SERVER"])
+    @@cache_client = Dalli::Client.new(
+      cache_server,
+      username: ENV['CACHE_USERNAME'],
+      password: ENV['CACHE_PASSWORD'],
+      expires_in: EXPIRES_IN
+    )
     @@cache_client
   end
 end
