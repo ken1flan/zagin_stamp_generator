@@ -9,6 +9,8 @@ require_relative 'classes/comic'
 if development?
   require "sinatra/reloader" if development?
   require 'pry'
+  require 'dotenv'
+  Dotenv.load
 end
 
 Color.load(File.expand_path("../colors.yml", __FILE__))
