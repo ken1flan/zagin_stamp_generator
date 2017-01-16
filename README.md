@@ -2,11 +2,11 @@
 
 This is a web application of generating a cat image with your specified text.
 
-## Sample(Heroku)
+## [Sample(Heroku)](https://zagin-stamp-generator.herokuapp.com/)
 
 ### Images
-![Zagin Stamp Generator](https://zagin-stamp-generator.herokuapp.com/)
-![Zagin Stamp Generator](https://zagin-stamp-generator.herokuapp.com?text=LGTM!)
+![Zagin Stamp Generator](http://zagin-stamp-generator.herokuapp.com/happi_coat?text=LGTM!&text_color=white&pattern=white&mirror_copy=no&font_name=NotoSansCJKjp-Black&size=Large)
+![Zagin Stamp Generator](http://zagin-stamp-generator.herokuapp.com/cheers?text=Cheers!&text_color=white&pattern=white&mirror_copy=no&font_name=NotoSansCJKjp-Black&size=Large)
 
 ### Form
 https://zagin-stamp-generator.herokuapp.com/form
