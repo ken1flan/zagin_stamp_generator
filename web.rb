@@ -80,6 +80,10 @@ get '/save_params' do
   )
 end
 
+get '/' do
+  haml :'top/index'
+end
+
 get '/?:image_name?' do
   font_name = params[:font_name]
 
