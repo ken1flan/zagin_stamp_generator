@@ -30,7 +30,7 @@ class Comic
     @panels = {}
     @panel_attributes.each do |id, params|
       stamp = Stamp.create_by_id(params[:image_name])
-      stamp.mirror_copy = params[:mirror_copy] == 'yes'
+      stamp.mirror_copy = params[:mirror_copy] == true
       stamp.text = params[:text]
       stamp.text_color = params[:text_color]
       stamp.font_name = params[:font_name]
